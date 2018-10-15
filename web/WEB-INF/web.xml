@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--从类路径下加载Spring配置文件，classpath关键字特指类路径下加载-->
+  <!--这里可以多个配置文件，建议采用逗号隔开的方式-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:flexible-context.xml</param-value>
+    </context-param>
+    <!--负责启动Spring容器的监听器，他将引用上面的上下文件参数获取Spring配置文件的地址-->
+   <!--该监听器在web容器启动时自动运行，它会根据contextConfigLocation
+   Web容器参数获取Spring配置文件，并且启动Spring容器。-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+<!--
+这里声明了一个servlet,在SpingrMvc也哦那个有一个Spring配置文件，该配置文件的文件名和此处定义
+的servlet名字有一个七月，即采用(servlet名-servlet.xml)的形式配。在这里，servlet的名字为flexible
+那么在/WEB-INF目录下必须提供一个名为flexible-servlet.xml的spring mvc配置文件，但是这个配置文件
+无需通过web.xml的contextConfigLocation上下文参数进行声明，因为Spring mvc 的Servlet会自动将
+flexible-servlet.xml文件和Spring的其他配置文件-->
+    <servlet>
+        <servlet-name>flexible</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>flexible</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+</web-app>
