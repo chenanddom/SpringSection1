@@ -155,8 +155,10 @@
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
+                    <!--如果要实现访问不需要在url添加项目名称，需要添加该参数-->
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <!--使用maven构建需要如果不是标准的风格提供一个web的文件夹的位置，-->
                     <webAppSourceDirectory>
                         ${basedir}/web
                     </webAppSourceDirectory>
